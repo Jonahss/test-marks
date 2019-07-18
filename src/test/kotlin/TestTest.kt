@@ -1,5 +1,8 @@
 package me.jonahss
 
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import java.util.Arrays.asList
 
 enum class MyTags : Tag {
@@ -26,6 +29,9 @@ fun main(args : Array<String>) {
         // assert user is logged in
         // test code here
         // driver.getElementbyId....
+        runBlocking {
+            delay(4000)
+        }
 
         t.pass()
 
@@ -35,6 +41,9 @@ fun main(args : Array<String>) {
 
     var testB = Test("testB", script = fun(t) : TestResult {
         // test code here
+        runBlocking {
+            delay(2000)
+        }
 
         t.fail()
 
@@ -44,23 +53,27 @@ fun main(args : Array<String>) {
     val testAResult = testA.run()
     val testBResult = testB.run()
 
-    println(testAResult)
-    println(testBResult)
+    runBlocking {
+        println(testAResult.await())
+        println(testBResult.await())
+    }
 
 
     // or
 
-    val results = asList(testA.run(), testB.run())
-
-    println(results)
+    runBlocking {
+        val results = awaitAll(testA.run(), testB.run())
+        println(results)
+    }
 
     // how about a suite?
 
     val smokeTests = TestSuite("Smoke Tests", testA, testB)
 
-    val smokeTestResults = smokeTests.run()
-
-    println(smokeTestResults)
+    runBlocking {
+        val smokeTestResults = smokeTests.run()
+        println(smokeTestResults)
+    }
 
     /*
     var sanityTests = getTestsWithTag(MyTags.SANITY)

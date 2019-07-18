@@ -1,5 +1,10 @@
 package me.jonahss
 
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+
 class Test(val name : String, vararg tags : Tag, val script : (test : Test) -> TestResult) {
     var result : TestResult = TestResult(name)
     var tags = tags
@@ -13,8 +18,11 @@ class Test(val name : String, vararg tags : Tag, val script : (test : Test) -> T
         result.state = TestResultStatus.FAIL
     }
 
-    fun run () : TestResult {
-        return script(this)
+    fun run () : Deferred<TestResult> {
+        val self = this
+        return GlobalScope.async {
+            script(self)
+        }
     }
 }
 
@@ -45,12 +53,10 @@ class TestSuite(val name : String, vararg tests : Test) {
 
     val tests = tests
 
-    fun run () : HashSet<TestResult> {
-        val results = HashSet<TestResult>()
-        for (test in tests) {
-            results.add(test.run())
-        }
-        return results
+    suspend fun run () : List<TestResult> {
+        var results = tests.map{ it.run() }
+
+        return results.awaitAll()
     }
 }
 
