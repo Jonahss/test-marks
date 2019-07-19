@@ -69,6 +69,8 @@ fun main(args : Array<String>) {
     // how about a suite?
 
     val smokeTests = TestSuite("Smoke Tests", testA, testB)
+    smokeTests.onTestStart = { println("starting ${it.name}") }
+    smokeTests.onTestFinish = { println("test ${it.testName} ${it.state}") }
 
     runBlocking {
         val smokeTestResults = smokeTests.run()

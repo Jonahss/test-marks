@@ -53,16 +53,19 @@ interface Tag {
 class TestSuite(val name : String, vararg tests : Test) {
 
     val tests = tests
+    var onTestStart : ((test : Test) -> Unit)? = null
+    var onTestFinish : ((result : TestResult) -> Unit)? = null
+
     // TODO set this.results
+    // TODO can TestSuite just extend a Collection?
 
     suspend fun run () : List<TestResult> {
         var results = tests.map{
             GlobalScope.async {
-                println("starting ${it.name}")
-                val result = it.run()
-                val res = result.await()
-                println("test ${res.testName} ${res.state}")
-                res
+                onTestStart?.invoke(it)
+                val result = it.run().await()
+                onTestFinish?.invoke(result)
+                result
             }
         }
 
