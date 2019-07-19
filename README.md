@@ -1,16 +1,16 @@
 ## Why Are Tests Methods? And Suites Classes? A Test should be an Object
 
-__jonah [5:41 PM]__
+_jonah [5:41 PM]_
 
 funny u mention it, im actually working on a kotlin test framework to replace junit/testng
 
-__Noam [5:42 PM]__
+_Noam [5:42 PM]_
 
 Hah
 
 What sort of framework
 
-__jonah [5:45 PM]__
+_jonah [5:45 PM]_
 
 based on a couple key premises
 
@@ -20,9 +20,9 @@ too often with junit and the like, teams dont parallelize their tests until its 
 
 so
 
-_1: parallel by default_
+__1: parallel by default__
 
-__jonah [5:52 PM]__
+_jonah [5:52 PM]_
 
 second, tests in java always felt weird shimmed into the OOP structure. why are tests methods, and collections of tests (called suites in other frameworks) classes? doesnt make much sense, because everybody thinks of their tests as being objects, and collections of tests should just be collections.
 
@@ -34,12 +34,12 @@ of course, in order to work the way i imagine, test objects need to live in some
 
 so:
 
-_1: parallel by default_
-_2: tests as objects, suites as collections_
+__1: parallel by default__
+__2: tests as objects, suites as collections__
 
-thirdly, theres _no need now for a 1:many mapping between suites and tests_. you should be able to make any number of collections of tests to run in different situations
+thirdly, theres __no need now for a 1:many mapping between suites and tests__. you should be able to make any number of collections of tests to run in different situations
 
-fourth, and final, the parallelism and suites makes it difficult to manage test preconditions.
+fourth, and final, the parallelism and suites makes it difficult to manage __test preconditions__.
 
 so my goal is to have functions which you can declare as a prerequisite for a test. for example, you indicate that your test requires a user with a shopping cart with one item in it. the test system when in a planning stage before running tests (but after knowing what tests you want to run) analyzes the prerequisites and assembles a tree of tests which satisfy your prerequisites. building the minimal set of tests with maximum parallelizstion
 
