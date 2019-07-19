@@ -1,16 +1,16 @@
 ## Why Are Tests Methods? And Suites Classes? A Test should be an Object
 
-jonah [5:41 PM]
+__jonah [5:41 PM]__
 
 funny u mention it, im actually working on a kotlin test framework to replace junit/testng
 
-Noam [5:42 PM]
+__Noam [5:42 PM]__
 
 Hah
 
 What sort of framework
 
-jonah [5:45 PM]
+__jonah [5:45 PM]__
 
 based on a couple key premises
 
@@ -22,7 +22,7 @@ so
 
 _1: parallel by default_
 
-jonah [5:52 PM]
+__jonah [5:52 PM]__
 
 second, tests in java always felt weird shimmed into the OOP structure. why are tests methods, and collections of tests (called suites in other frameworks) classes? doesnt make much sense, because everybody thinks of their tests as being objects, and collections of tests should just be collections.
 
