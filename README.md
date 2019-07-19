@@ -1,7 +1,4 @@
-## Why Are Tests Methods? And Suites Classes?
-# A Test is an Object
-
-------
+## Why Are Tests Methods? And Suites Classes? A Test should be an Object
 
 jonah [5:41 PM]
 funny u mention it, im actually working on a kotlin test framework to replace junit/testng
