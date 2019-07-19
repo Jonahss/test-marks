@@ -35,6 +35,7 @@ of course, in order to work the way i imagine, test objects need to live in some
 so:
 
 __1: parallel by default__
+
 __2: tests as objects, suites as collections__
 
 thirdly, theres __no need now for a 1:many mapping between suites and tests__. you should be able to make any number of collections of tests to run in different situations
