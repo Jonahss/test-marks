@@ -58,6 +58,7 @@ class TestSuite(val name : String, vararg tests : Test) {
 
     // TODO set this.results
     // TODO can TestSuite just extend a Collection?
+    // TODO can we have a Test interface , so that a suite can be composed of a mixture of tests and other suites?
 
     suspend fun run () : List<TestResult> {
         var results = tests.map{
