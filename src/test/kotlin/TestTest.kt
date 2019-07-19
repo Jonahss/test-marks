@@ -30,7 +30,7 @@ fun main(args : Array<String>) {
         // test code here
         // driver.getElementbyId....
         runBlocking {
-            delay(4000)
+            delay(2000)
         }
 
         t.pass()
@@ -42,7 +42,7 @@ fun main(args : Array<String>) {
     var testB = Test("testB", script = fun(t) : TestResult {
         // test code here
         runBlocking {
-            delay(2000)
+            delay(100)
         }
 
         t.fail()

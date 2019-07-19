@@ -20,6 +20,7 @@ class Test(val name : String, vararg tags : Tag, val script : (test : Test) -> T
 
     fun run () : Deferred<TestResult> {
         val self = this
+        // TODO set this.result, make it a deferred
         return GlobalScope.async {
             script(self)
         }
@@ -52,9 +53,18 @@ interface Tag {
 class TestSuite(val name : String, vararg tests : Test) {
 
     val tests = tests
+    // TODO set this.results
 
     suspend fun run () : List<TestResult> {
-        var results = tests.map{ it.run() }
+        var results = tests.map{
+            GlobalScope.async {
+                println("starting ${it.name}")
+                val result = it.run()
+                val res = result.await()
+                println("test ${res.testName} ${res.state}")
+                res
+            }
+        }
 
         return results.awaitAll()
     }
