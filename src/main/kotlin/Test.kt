@@ -5,9 +5,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
-class Test(val name : String, vararg tags : Tag, val script : (test : Test) -> TestResult) {
+open class Test(val name : String, vararg tags : Tag, testScript : (test : Test) -> TestResult) {
     var result : TestResult = TestResult(name)
     var tags = tags
+    var script = testScript
 
 
     fun pass () {

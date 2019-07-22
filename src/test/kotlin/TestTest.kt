@@ -24,7 +24,7 @@ enum class Author : Tag {
 
 fun main(args : Array<String>) {
 
-    var testA = Test("testA", MyTags.SANITY, YourTags.SUPERFLAKEY, Author.CHUCK, script = fun(t) : TestResult {
+    var testA = Test("testA", MyTags.SANITY, YourTags.SUPERFLAKEY, Author.CHUCK, testScript = fun(t) : TestResult {
         // user.signin
         // assert user is logged in
         // test code here
@@ -34,12 +34,12 @@ fun main(args : Array<String>) {
         }
 
         t.pass()
-
+//TODO dont nerd to return result
         return t.result
     })
 
 
-    var testB = Test("testB", script = fun(t) : TestResult {
+    var testB = Test("testB", testScript = fun(t) : TestResult {
         // test code here
         runBlocking {
             delay(100)
